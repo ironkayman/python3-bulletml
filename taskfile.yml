@@ -1,0 +1,14 @@
+# https://taskfile.dev
+
+version: '3'
+
+# poetry shell
+# source emsdk_env.sh
+# cd ..
+
+tasks:
+  build:
+    aliases: [b]
+    cmds:
+      - pyodide build
+

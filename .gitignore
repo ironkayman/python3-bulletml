@@ -1,4 +1,10 @@
+# python
 *.pyc
 
 # poetry local venv
 .venv
+emsdk
+.pyodide-xbuildenv
+
+# pyodide/emscripten artifacts
+dist
