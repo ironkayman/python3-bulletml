@@ -25,11 +25,17 @@ respawn the bullet pattern, and Enter to restart it.
 
 ## Installing
 
-BulletML requires Python 2.6 or later. It should work on Python 3. It
-has no dependencies outside the CPython standard library.
-
-    $ ./setup.py build
-    $ sudo ./setup.py install
+```sh
+poetry shell
+git clone https://github.com/emscripten-core/emsdk.git
+cd emsdk
+PYODIDE_EMSCRIPTEN_VERSION=$(pyodide config get emscripten_version)
+./emsdk install ${PYODIDE_EMSCRIPTEN_VERSION}
+./emsdk activate ${PYODIDE_EMSCRIPTEN_VERSION}
+source emsdk_env.sh
+task build/release
+task build/debug
+```
 
 
 ## License

@@ -7,8 +7,11 @@ version: '3'
 # cd ..
 
 tasks:
-  build:
-    aliases: [b]
+  build/release:
+    aliases: [br]
     cmds:
-      - pyodide build
-
+      - pyodide build --outdir dist/release
+  build/debug:
+    aliases: [bd]
+    cmds:
+      - CFLAGS=-g2 LDFLAGS=g2 pyodide build --outdir dist/debug
