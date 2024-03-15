@@ -1,14 +1,16 @@
 [tool.poetry]
-name = "python-bulletml"
+name = "bulletml"
 version = "0.1.0"
 description = ""
 authors = ["mcgillij <mcgillivray.jason@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-pygame = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
+
+[tool.poetry.group.dev.dependencies]
+pygame = "^2.5.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

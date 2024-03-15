@@ -1,1 +1,4 @@
 *.pyc
+
+# poetry local venv
+.venv
