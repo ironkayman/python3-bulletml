@@ -29,6 +29,32 @@ task build/release
 task build/debug
 ```
 
+Once installed, further building pipeline consists of:
+
+```sh
+poetry shell
+cd emsdk
+source emsdk_env.sh
+task build/release
+task build/debug
+```
+
+## Usage
+
+Since _Pyodide packages_ are as of currently (12.03.2024) while remaining as wheels, are not compatible with PyPi so you need to clone this repo retro-style w/ fancy package manager:
+
+### Poetry
+
+```toml
+[tool.poetry.dependencies]
+python = "^3.10"
+bulletml = {file = "bulletml/dist/release/bulletml-0.1.0-py3-none-any.whl"}
+```
+
+... where `... = "bulletml/...` is this repo clone.
+
+> **NOTE:** Python 3.10+ herein is a strict requirement due to specificity of pyodide/emscripten building pipeline
+
 ## License
 
 The BulletML specification is the work of Kenta Cho.
