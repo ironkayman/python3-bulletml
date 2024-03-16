@@ -9,13 +9,26 @@ In addition to the standard BulletML XML format, this module supports an equival
 More information is available at [the BulletML homepage](http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/index_e.html), or [the python-bulletml homepage](https://yukkurigames.com/python-bulletml/).
 
 ```sh
-./bulletml-runner examples/*/*.xml
+./demo/bulletml-runner-pygame.py examples/*/*.xml
+# or
+./demo/bulletml-runner-arcade.py examples/*/*.xml
 ```
 
 Use Page Up and Page Down to switch between bullet definitions, S to
 respawn the bullet pattern, and Enter to restart it.
 
 ## Installing
+
+> Why pyodide?
+> Python has multiple ways of building/installing a packages, like setuptools, distutils with, regulary, a wheel/`.whl` as an output, since this fork is created solely for a personal project, I am more than fine building in a fast-and-loose manner, a wheel without any need to dive again into mentioned above native solutions. It may change in the future but currently it is more of an overhead for _my_ needs.
+
+**Prerequisites**:
+
+- python 3.10+
+- poetry
+- [taskfile](https://taskfile.dev) (optional, see tasks' commands within their appropriate `cmd` sections)
+
+**First-time environment setup**:
 
 ```sh
 poetry shell
@@ -26,24 +39,28 @@ PYODIDE_EMSCRIPTEN_VERSION=$(pyodide config get emscripten_version)
 ./emsdk activate ${PYODIDE_EMSCRIPTEN_VERSION}
 source emsdk_env.sh
 task build/release
+# or
 task build/debug
 ```
 
-Once installed, further building pipeline consists of:
+Once installed, a regular pipeline consists of:
 
 ```sh
 poetry shell
 cd emsdk
 source emsdk_env.sh
 task build/release
+# or
 task build/debug
 ```
 
 ## Usage
 
-Since _Pyodide packages_ are as of currently (12.03.2024) while remaining as wheels, are not compatible with PyPi so you need to clone this repo retro-style w/ fancy package manager:
+Since _Pyodide packages_ are as of currently (12.03.2024) while remaining as wheels, are not compatible with PyPi so you need to clone this repo retro-style and add local path to the repo dists built earlier:
 
 ### Poetry
+
+Poetry's config snippet, add the following lines if abscent:
 
 ```toml
 [tool.poetry.dependencies]
@@ -51,9 +68,16 @@ python = "^3.10"
 bulletml = {file = "bulletml/dist/release/bulletml-0.1.0-py3-none-any.whl"}
 ```
 
-... where `... = "bulletml/...` is this repo clone.
+where `= "bulletml/` is this a path to this repo's cloned directory.
 
-> **NOTE:** Python 3.10+ herein is a strict requirement due to specificity of pyodide/emscripten building pipeline
+Then regenerate `poetry.lock` file:
+
+```sh
+poetry lock
+poetry install
+```
+
+> **NOTE:** Python 3.10+ herein is a strict requirement due to specificity of pyodide/emscripten build pipeline
 
 ## License
 
