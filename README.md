@@ -1,27 +1,19 @@
-# python-bulletml - BulletML for Python
+# python3-bulletml
 
-BulletML is the Bullet Markup Language. BulletML can describe the
-barrage of bullets in shooting games. (For example Progear, Psyvariar,
-Gigawing2, G DARIUS, XEVIOUS, ...) This module parses and executes
-BulletML scripts in Python. All data structures in it are
-renderer-agnostic. A sample renderer for Pygame is included. The full
-API documentation is contained in its Python docstrings.
+> _BulletML for Python3_
 
-In addition to the standard BulletML XML format, this module supports
-an equivalent YAML format. For convenience, two simple collision
-routines are provided, `bulletml.overlaps` for stationary circles and
-`bulletml.collides` for moving circles.
+BulletML is the Bullet Markup Language. BulletML can describe the barrage of bullets in shooting games. (For example Progear, Psyvariar, Gigawing2, G DARIUS, XEVIOUS, ...) This module parses and executes BulletML scripts in Python. All data structures in it are renderer-agnostic. A sample renderer for Pygame is included. The full API documentation is contained in its Python docstrings.
 
-More information is available at
-[the BulletML homepage](http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/index_e.html),
-or
-[the python-bulletml homepage](https://yukkurigames.com/python-bulletml/).
+In addition to the standard BulletML XML format, this module supports an equivalent YAML format. For convenience, two simple collision routines are provided, `bulletml.overlaps` for stationary circles and `bulletml.collides` for moving circles.
 
-    $ ./bulletml-runner examples/*/*.xml
+More information is available at [the BulletML homepage](http://www.asahi-net.or.jp/~cs8k-cyu/bulletml/index_e.html), or [the python-bulletml homepage](https://yukkurigames.com/python-bulletml/).
+
+```sh
+./bulletml-runner examples/*/*.xml
+```
 
 Use Page Up and Page Down to switch between bullet definitions, S to
 respawn the bullet pattern, and Enter to restart it.
-
 
 ## Installing
 
@@ -36,7 +28,6 @@ source emsdk_env.sh
 task build/release
 task build/debug
 ```
-
 
 ## License
 
