@@ -15,3 +15,6 @@ tasks:
     aliases: [bd]
     cmds:
       - CFLAGS=-g2 LDFLAGS=g2 pyodide build --outdir dist/debug
+  demo/pygame:
+    cmds:
+      - poetry run python demo/bulletml-runner-pygame.py examples/*/*.xml

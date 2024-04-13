@@ -14,13 +14,14 @@ More information is available at [the BulletML homepage](http://www.asahi-net.or
 ./demo/bulletml-runner-arcade.py examples/*/*.xml
 ```
 
-Use Page Up and Page Down to switch between bullet definitions, S to
-respawn the bullet pattern, and Enter to restart it.
+- `Page Up/Down` - switch between bullet definitions\n
+- `S` - respawn current bullet pattern\n
+- `Enter` - restart currently running bullet pattern\n
 
 ## Installing
 
 > Why pyodide?
-> Python has multiple ways of building/installing a packages, like setuptools, distutils with, regulary, a wheel/`.whl` as an output, since this fork is created solely for a personal project, I am more than fine building in a fast-and-loose manner, a wheel without any need to dive again into mentioned above native solutions. It may change in the future but currently it is more of an overhead for _my_ needs.
+> Python has multiple ways of building/installing a packages, pyodide is used here for zero-configuration pacakging.
 
 **Prerequisites**:
 

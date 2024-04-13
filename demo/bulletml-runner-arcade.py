@@ -22,31 +22,45 @@ except ImportError:
 else:
     psyco.full()
 
-def main(argv):
-    if not argv:
-        raise SystemExit("Usage: %s filename ..." % sys.argv[0])
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+SCREEN_TITLE = "BulletML Arcade demo"
 
-    pygame.display.init()
-    screen = pygame.display.set_mode([600, 600], pygame.DOUBLEBUF)
-    red = pygame.Surface([3, 3])
-    red.fill([255, 0, 0])
-    green = pygame.Surface([3, 3])
-    green.fill([0, 255, 0])
-    blue = pygame.Surface([3, 3])
-    blue.fill([0, 0, 255])
-    clock = pygame.time.Clock()
-    target = bulletml.Bullet()
+class BulletDemo(arc.View):
 
-    bullets = dict(red=red, green=green, blue=blue)
+    def __init__(
+        self,
+        window: arc.Window = None,
+    ) -> None:
+        """ """
+        super().__init__(window=window)
 
-    file_idx = 0
+    def setup(self) -> None:
+        texture_red = arc.Texture.create_filled('red', (3,3), (255,0,0))
+        texture_greed = arc.Texture.create_filled('green', (3,3), (0,255,0))
+        texture_blue = arc.Texture.create_filled('blue', (3,3), (0,0,255))
 
-    while True:
-        filename = argv[file_idx % len(argv)]
+        red = arc.Sprite(texture = texture_red,)
+        green = arc.Sprite(texture = texture_greed,)
+        blue = arc.Sprite(texture = texture_blue)
+
+        self._bml_target = bulletml.Bullet()
+        self._bml_bullets = dict(red=red, green=green, blue=blue)
+
+        self.file_idx = 0
+
+    def on_show_view(self) -> None:
+        self.window.set_mouse_visible(True)
+
+    def on_hide_view(self) -> None:
+        return
+
+    def on_update(self, dt: float):
+        filename = argv[self.file_idx % len(argv)]
         doc = bulletml.BulletML.FromDocument(open(filename, "rU"))
         source = bulletml.Bullet.FromDocument(
             doc, x=150, y=150, target=target, rank=0.5)
-                                         
+
         active = set([source])
         source.vanished = True
         print(filename)
@@ -56,7 +70,7 @@ def main(argv):
         paused = False
         newfile = False
 
-        pygame.display.set_caption(os.path.basename(filename))
+        window.title = os.path.basename(filename)
 
         while active and not newfile:
             go = False
@@ -131,9 +145,31 @@ def main(argv):
                         bullet = bullets.get(obj.appearance, red)
                         screen.blit(bullet, [x, 600 - y])
             clock.tick(60)
-            pygame.display.flip()
-
         print("  Finished: %04d: %d bullets." % (frames, total))
+
+    def on_draw(self) -> None:
+        """
+        """
+        return
+
+
+def main(argv):
+    """Creates instance of a game & launch it."""
+
+    if not argv:
+        raise SystemExit("Usage: %s filename ..." % sys.argv[0])
+
+    window = arc.Window(
+        SCREEN_WIDTH,
+        SCREEN_HEIGHT,
+        SCREEN_TITLE,
+    )
+    window.gc_mode = "context_gc"
+    window.ctx.gc()
+    arc.enable_timings()
+
+    bullet_demo = BulletDemo(window)
+    window.show_view(bullet_demo)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
